@@ -35,9 +35,9 @@ public class App {
 
         flightStatistics.mapToPair(statistics -> new Tuple2<>(
                 String.format(
-                        "from:%-86sto:%-86s",
-                        String.format("\"%s\",", airportsBroadcaster.value().get(statistics._1._1)),
-                        String.format("\"%s\",", airportsBroadcaster.value().get(statistics._1._2))
+                        "from:%84s\",to:%84s\"",
+                        '"' + airportsBroadcaster.value().get(statistics._1._1),
+                        '"' + airportsBroadcaster.value().get(statistics._1._2)
                 ),
                 statistics._2.getStatistics()
         )).saveAsTextFile("output");
