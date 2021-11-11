@@ -4,8 +4,6 @@ import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 import scala.Tuple2;
 
-import java.util.Objects;
-
 public class App {
     public static void main(String[] args) {
         SparkConf conf = new SparkConf().setAppName("lab3");
@@ -15,7 +13,7 @@ public class App {
         String firstDataFlight = dataFlights.first();
         JavaPairRDD<Tuple2<Integer, Integer>, Flight> airportFlights = dataFlights
                 .filter(dataFlight -> firstDataFlight != dataFlight)
-                .mapToPair(dataFlight -> Flight.parseCSV(dataFlight).getAirports());
+                .mapToPair(dataFlight -> Flight.parseCSV(dataFlight).getTupleWithAirports());
 
         JavaRDD<String> airports = sc.textFile("664600583_T_ONTIME_sample.csv");
         String firstDataAirport = airports.first();

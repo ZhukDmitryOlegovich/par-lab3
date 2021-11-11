@@ -32,7 +32,7 @@ public class Flight {
         );
     }
 
-    public Tuple2<Tuple2<Integer, Integer>, Flight> getAirports() {
+    public Tuple2<Tuple2<Integer, Integer>, Flight> getTupleWithAirports() {
         return new Tuple2<>(new Tuple2<>(originAirportId, destAirportId), this);
     }
 
