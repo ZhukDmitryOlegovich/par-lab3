@@ -1,6 +1,7 @@
+import scala.Serializable;
 import scala.Tuple2;
 
-public class Airport {
+public class Airport implements Serializable {
     private final int code;
     private final String name;
 
