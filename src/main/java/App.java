@@ -12,9 +12,9 @@ public class App {
         JavaRDD<String> flights = sc.textFile("L_AIRPORT_ID.csv");
         String firstFlight = flights.first();
         flights = flights.filter(e -> firstFlight != e);
-//        flights.mapToPair(flight -> {
-//
-//        });
+        flights.mapToPair(flight -> {
+            Flight.parseCSV(flight);
+        });
 
         JavaRDD<String> airports = sc.textFile("664600583_T_ONTIME_sample.csv");
         String firstAirport = airports.first();
