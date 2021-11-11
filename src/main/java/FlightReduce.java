@@ -10,5 +10,10 @@ public class FlightReduce implements Serializable {
         maxDelay = delay;
         countDelays = delay == 0 ? 0 : 1;
         countCancelled = canceled ? 0 : 1;
+        countFlights = 1;
+    }
+
+    public static FlightReduce merge(FlightReduce accumulate, FlightReduce other) {
+        
     }
 }
