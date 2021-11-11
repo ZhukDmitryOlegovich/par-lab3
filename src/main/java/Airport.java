@@ -18,14 +18,6 @@ public class Airport implements Serializable {
         this.name = name;
     }
 
-    public final String getName() {
-        return name;
-    }
-
-    public final int getCode() {
-        return code;
-    }
-
     public static Airport parseCSV(final String csv) {
         String[] list = csv.split(CSV_SPLIT_REGEX, CSV_SPLIT_LIMIT);
         return new Airport(
