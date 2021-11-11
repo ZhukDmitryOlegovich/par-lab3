@@ -15,9 +15,10 @@ public class App {
                 .filter(dataFlight -> firstDataFlight != dataFlight)
                 .mapToPair(dataFlight -> Flight.parseCSV(dataFlight).getTupleWithAirports());
 
-//        airportFlights.combineByKey((a, b) -> {
-//            return a;
-//        });
+        airportFlights.combineByKey(
+                flight -> new FlightReduce(flight.getDelayTime(), flight.isCancelled()),
+                (accumulator, flight) ->
+        );
 
         JavaRDD<String> dataAirports = sc.textFile("664600583_T_ONTIME_sample.csv");
         String firstDataAirport = dataAirports.first();
