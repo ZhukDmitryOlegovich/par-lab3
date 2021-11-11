@@ -13,7 +13,7 @@ public class App {
         SparkConf conf = new SparkConf().setAppName("lab3");
         JavaSparkContext sc = new JavaSparkContext(conf);
 
-        JavaRDD<String> dataAirports = sc.textFile("664600583_T_ONTIME_sample.csv");
+        JavaRDD<String> dataAirports = sc.textFile("L_AIRPORT_ID.csv");
         String firstDataAirport = dataAirports.first();
         JavaPairRDD<Integer, String> airportsRDD = dataAirports
                 .filter(dataAirport -> !Objects.equals(firstDataAirport, dataAirport))
@@ -21,7 +21,7 @@ public class App {
 
         final Broadcast<Map<Integer, String>> airportsBroadcaster = sc.broadcast(airportsRDD.collectAsMap());
 
-        JavaRDD<String> dataFlights = sc.textFile("L_AIRPORT_ID.csv");
+        JavaRDD<String> dataFlights = sc.textFile("664600583_T_ONTIME_sample.csv");
         String firstDataFlight = dataFlights.first();
         JavaPairRDD<Tuple2<Integer, Integer>, Flight> airportFlights = dataFlights
                 .filter(dataFlight -> !Objects.equals(firstDataFlight, dataFlight))
