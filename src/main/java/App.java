@@ -4,6 +4,8 @@ import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 import scala.Tuple2;
 
+import java.util.Map;
+
 public class App {
     public static void main(String[] args) {
         SparkConf conf = new SparkConf().setAppName("lab3");
@@ -26,5 +28,7 @@ public class App {
         JavaPairRDD<Integer, String> airports = dataAirports
                 .filter(dataAirport -> firstDataAirport != dataAirport)
                 .mapToPair(dataAirport -> Airport.parseCSV(dataAirport).getTuple());
+
+        Map<Integer, String> airportNameIdMap = airports.collectAsMap();
     }
 }
