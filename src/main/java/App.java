@@ -16,7 +16,9 @@ public class App {
         dataFlights.mapToPair(dataFlight -> {
             Flight flight = Flight.parseCSV(dataFlight);
             return new Tuple2<>(
-                    new Tuple2<>(flight.getOriginAirportId(), flight.getDestAirportId()), flight);
+                    new Tuple2<>(flight.getOriginAirportId(), flight.getDestAirportId()),
+                    flight
+            );
         });
 
         JavaRDD<String> airports = sc.textFile("664600583_T_ONTIME_sample.csv");
