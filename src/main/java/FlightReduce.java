@@ -22,6 +22,11 @@ public class FlightReduce implements Serializable {
     }
 
     public String getStatistics() {
-        return 
+        return String.format(
+                "max: %f, \tcancelled (%): %f, \tdelay (%): %f",
+                maxDelay,
+                100f * countDelays / countFlights,
+                100f * countDelays / countFlights
+        );
     }
 }
