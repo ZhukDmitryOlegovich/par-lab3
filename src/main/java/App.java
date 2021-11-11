@@ -18,7 +18,7 @@ public class App {
                 .filter(dataFlight -> firstDataFlight != dataFlight)
                 .mapToPair(dataFlight -> Flight.parseCSV(dataFlight).getTupleWithAirports());
 
-        JavaPairRDD<Tuple2<Integer, Integer>, FlightReduce> statistic = airportFlights.combineByKey(
+        JavaPairRDD<Tuple2<Integer, Integer>, FlightReduce> flightStatistics = airportFlights.combineByKey(
                 FlightReduce::new,
                 FlightReduce::accumulate,
                 FlightReduce::merge
@@ -34,6 +34,8 @@ public class App {
 
         final Broadcast<Map<Integer, String>> airportsBroadcasted = sc.broadcast(airportsMap);
 
-        
+        flightStatistics.mapToPair(statistics -> {
+            String fromName = airportsBroadcasted.value()
+        })
     }
 }
