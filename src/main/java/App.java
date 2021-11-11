@@ -17,7 +17,7 @@ public class App {
 
         JavaRDD<String> dataAirports = sc.textFile("664600583_T_ONTIME_sample.csv");
         String firstDataAirport = dataAirports.first();
-        JavaPairRDD<Integer, String> airportFlights1 = dataAirports
+        JavaPairRDD<Integer, String> airports = dataAirports
                 .filter(dataAirport -> firstDataAirport != dataAirport)
                 .mapToPair(dataAirport -> Airport.parseCSV(dataAirport).getTuple());
     }
