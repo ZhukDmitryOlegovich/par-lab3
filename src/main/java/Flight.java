@@ -1,6 +1,7 @@
+import scala.Serializable;
 import scala.Tuple2;
 
-public class Flight {
+public class Flight implements Serializable {
     private final int originAirportId;
     private final int destAirportId;
     private final float delayTime;
