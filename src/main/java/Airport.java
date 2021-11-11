@@ -1,3 +1,5 @@
+import scala.Tuple2;
+
 public class Airport {
     private final int code;
     private final String name;
@@ -26,5 +28,9 @@ public class Airport {
     public static Airport parseCSV(String csv) {
         String[] list = csv.replaceAll(CSV_REPLACE_REGEX, CSV_REPLACEMENT).split(CSV_SPLIT_REGEX, CSV_SPLIT_LIMIT);
         return new Airport(Integer.parseInt(list[CODE_CSV_INDEX]), list[NAME_CSV_INDEX]);
+    }
+
+    public Tuple2<String, Airport> getTupleWithAirports() {
+        return new Tuple2<>(new Tuple2<>(originAirportId, destAirportId), this);
     }
 }
