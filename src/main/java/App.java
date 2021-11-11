@@ -10,9 +10,14 @@ public class App {
         JavaSparkContext sc = new JavaSparkContext(conf);
 
         JavaRDD<String> flights = sc.textFile("L_AIRPORT_ID.csv");
-        String first = flights.first();
-        flights = flights.filter(e -> first != e);
+        String firstFlight = flights.first();
+        flights = flights.filter(e -> firstFlight != e);
+//        flights.mapToPair(flight -> {
+//
+//        });
 
         JavaRDD<String> airports = sc.textFile("664600583_T_ONTIME_sample.csv");
+        String firstAirport = airports.first();
+        airports = airports.filter(e -> firstAirport != e);
     }
 }
