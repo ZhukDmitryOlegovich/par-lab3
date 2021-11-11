@@ -23,7 +23,7 @@ public class Flight implements Serializable {
         this.cancelled = cancelled;
     }
 
-    public static Flight parseCSV(String csv) {
+    public static Flight parseCSV(final String csv) {
         String[] list = csv.replaceAll(CSV_REPLACE_REGEX, CSV_REPLACEMENT).split(CSV_SPLIT_REGEX);
         return new Flight(
                 Integer.parseInt(list[ORIGIN_AIRPORT_ID_CSV_INDEX]),
