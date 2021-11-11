@@ -6,6 +6,7 @@ import org.apache.spark.broadcast.Broadcast;
 import scala.Tuple2;
 
 import java.util.Map;
+import java.util.Objects;
 
 public class App {
     public static void main(String[] args) {
@@ -15,7 +16,7 @@ public class App {
         JavaRDD<String> dataAirports = sc.textFile("664600583_T_ONTIME_sample.csv");
         String firstDataAirport = dataAirports.first();
         JavaPairRDD<Integer, String> airportsRDD = dataAirports
-                .filter(dataAirport -> firstDataAirport != dataAirport)
+                .filter(dataAirport -> !Objects.equals(firstDataAirport, dataAirport))
                 .mapToPair(dataAirport -> Airport.parseCSV(dataAirport).getTuple());
 
         final Broadcast<Map<Integer, String>> airportsBroadcaster = sc.broadcast(airportsRDD.collectAsMap());
@@ -23,7 +24,7 @@ public class App {
         JavaRDD<String> dataFlights = sc.textFile("L_AIRPORT_ID.csv");
         String firstDataFlight = dataFlights.first();
         JavaPairRDD<Tuple2<Integer, Integer>, Flight> airportFlights = dataFlights
-                .filter(dataFlight -> firstDataFlight != dataFlight)
+                .filter(dataFlight -> !Objects.equals(firstDataFlight, dataFlight))
                 .mapToPair(dataFlight -> Flight.parseCSV(dataFlight).getTupleWithAirports());
 
         JavaPairRDD<Tuple2<Integer, Integer>, FlightReduce> flightStatistics = airportFlights.combineByKey(
