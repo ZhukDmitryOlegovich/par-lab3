@@ -20,14 +20,6 @@ public class Flight {
         this.cancelled = cancelled;
     }
 
-    public float getDelay() {
-        return delay;
-    }
-
-    public int getCode() {
-        return code;
-    }
-
     public static Flight parseCSV(String csv) {
         String[] list = csv.replaceAll(CSV_REPLACE_REGEX, CSV_REPLACEMENT).split(CSV_SPLIT_REGEX);
         return new Flight(
@@ -36,5 +28,17 @@ public class Flight {
                 list[DELAY_CSV_INDEX].isEmpty() ? 0 : Float.parseFloat(list[DELAY_CSV_INDEX]),
                 list[CANCELLED_CSV_INDEX].isEmpty()
         );
+    }
+
+    public int getOriginAirportId() {
+        return originAirportId;
+    }
+
+    public int getDestAirportId() {
+        return destAirportId;
+    }
+
+    public float getDelayTime() {
+        return delayTime;
     }
 }
