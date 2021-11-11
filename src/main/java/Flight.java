@@ -1,6 +1,6 @@
 public class Flight {
     private final int originAirportId;
-    private final boolean cancelled;
+    private final int destAirportId;
     private final boolean cancelled;
     private final boolean cancelled;
 
