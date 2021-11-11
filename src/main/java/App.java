@@ -12,6 +12,14 @@ public class App {
         SparkConf conf = new SparkConf().setAppName("lab3");
         JavaSparkContext sc = new JavaSparkContext(conf);
 
+        JavaRDD<String> dataAirports = sc.textFile("664600583_T_ONTIME_sample.csv");
+        String firstDataAirport = dataAirports.first();
+        JavaPairRDD<Integer, String> airportsRDD = dataAirports
+                .filter(dataAirport -> firstDataAirport != dataAirport)
+                .mapToPair(dataAirport -> Airport.parseCSV(dataAirport).getTuple());
+
+        final Broadcast<Map<Integer, String>> airportsBroadcaster = sc.broadcast(airportsRDD.collectAsMap());
+
         JavaRDD<String> dataFlights = sc.textFile("L_AIRPORT_ID.csv");
         String firstDataFlight = dataFlights.first();
         JavaPairRDD<Tuple2<Integer, Integer>, Flight> airportFlights = dataFlights
@@ -24,20 +32,13 @@ public class App {
                 FlightReduce::merge
         );
 
-        JavaRDD<String> dataAirports = sc.textFile("664600583_T_ONTIME_sample.csv");
-        String firstDataAirport = dataAirports.first();
-        JavaPairRDD<Integer, String> airportsRDD = dataAirports
-                .filter(dataAirport -> firstDataAirport != dataAirport)
-                .mapToPair(dataAirport -> Airport.parseCSV(dataAirport).getTuple());
-
-        Map<Integer, String> airportsMap = airportsRDD.collectAsMap();
-
-        final Broadcast<Map<Integer, String>> airportsBroadcasted = sc.broadcast(airportsMap);
-
-        flightStatistics.mapToPair(statistics -> String.format(
-                "from: %s, \tto: %s",
-                airportsBroadcasted.value().get(statistics._1._1),
-                airportsBroadcasted.value().get(statistics._1._2)
-        ));
+        flightStatistics.mapToPair(statistics -> new Tuple2<>(
+                String.format(
+                        "from: %s, \tto: %s",
+                        airportsBroadcaster.value().get(statistics._1._1),
+                        airportsBroadcaster.value().get(statistics._1._2)
+                ),
+                statistics._2.getStatistics()
+        )).saveAsTextFile("output");
     }
 }
