@@ -15,8 +15,10 @@ public class App {
                 .filter(dataFlight -> firstDataFlight != dataFlight)
                 .mapToPair(dataFlight -> Flight.parseCSV(dataFlight).getTupleWithAirports());
 
-        JavaRDD<String> airports = sc.textFile("664600583_T_ONTIME_sample.csv");
-        String firstDataAirport = airports.first();
-        airports = airports.filter(e -> firstDataAirport != e);
+        JavaRDD<String> dataAirports = sc.textFile("664600583_T_ONTIME_sample.csv");
+        String firstDataAirport = dataAirports.first();
+        JavaPairRDD<Integer, String> airportFlights1 = dataAirports
+                .filter(dataAirport -> firstDataAirport != dataAirport)
+                .mapToPair(dataAirport -> Airport.parseCSV(dataAirport).getTuple());
     }
 }

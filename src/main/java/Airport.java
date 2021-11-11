@@ -30,7 +30,7 @@ public class Airport {
         return new Airport(Integer.parseInt(list[CODE_CSV_INDEX]), list[NAME_CSV_INDEX]);
     }
 
-    public Tuple2<String, Airport> getTupleWithAirports() {
-        return new Tuple2<>(new Tuple2<>(originAirportId, destAirportId), this);
+    public Tuple2<Integer, String> getTuple() {
+        return new Tuple2<>(code, name);
     }
 }
