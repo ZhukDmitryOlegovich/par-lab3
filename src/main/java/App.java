@@ -18,7 +18,7 @@ public class App {
                 .mapToPair(dataFlight -> Flight.parseCSV(dataFlight).getAirports());
 
         JavaRDD<String> airports = sc.textFile("664600583_T_ONTIME_sample.csv");
-        String firstAirport = airports.first();
-        airports = airports.filter(e -> firstAirport != e);
+        String firstDataAirport = airports.first();
+        airports = airports.filter(e -> firstDataAirport != e);
     }
 }
