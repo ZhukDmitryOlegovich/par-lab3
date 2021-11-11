@@ -17,7 +17,7 @@ public class App {
 
         airportFlights.combineByKey(
                 flight -> new FlightReduce(flight.getDelayTime(), flight.isCancelled()),
-                (accumulator, flight) ->
+                (accumulator, flight) -> accumulator.
         );
 
         JavaRDD<String> dataAirports = sc.textFile("664600583_T_ONTIME_sample.csv");
