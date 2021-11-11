@@ -11,7 +11,7 @@ public class App {
 
         JavaRDD<String> flights = sc.textFile("L_AIRPORT_ID.csv");
         String first = flights.first();
-        flights = flights.filter(e -> !first.equals(e));
+        flights = flights.filter(e -> first != e);
 
         JavaRDD<String> airports = sc.textFile("664600583_T_ONTIME_sample.csv");
     }
