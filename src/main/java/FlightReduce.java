@@ -14,6 +14,14 @@ public class FlightReduce implements Serializable {
     }
 
     public static FlightReduce merge(FlightReduce accumulate, FlightReduce other) {
-        
+        accumulate.maxDelay = Math.max(accumulate.maxDelay, other.maxDelay);
+        accumulate.countDelays += other.countDelays;
+        accumulate.countCancelled += other.countCancelled;
+        accumulate.countFlights += other.countFlights;
+        return accumulate;
+    }
+
+    public String getStatistics() {
+        return 
     }
 }
