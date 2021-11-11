@@ -15,7 +15,7 @@ public class App {
                 .filter(dataFlight -> firstDataFlight != dataFlight)
                 .mapToPair(dataFlight -> Flight.parseCSV(dataFlight).getTupleWithAirports());
 
-        airportFlights.combineByKey(
+        JavaPairRDD<Tuple2<Integer, Integer>, FlightReduce> statistic = airportFlights.combineByKey(
                 FlightReduce::new,
                 FlightReduce::accumulate,
                 FlightReduce::merge
