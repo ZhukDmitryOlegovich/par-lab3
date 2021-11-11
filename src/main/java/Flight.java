@@ -1,7 +1,7 @@
 public class Flight {
     private final int originAirportId;
     private final int destAirportId;
-    private final boolean cancelled;
+    private final float delayTime;
     private final boolean cancelled;
 
     private static final int ORIGIN_AIRPORT_ID_CSV_INDEX = 11;
@@ -13,7 +13,10 @@ public class Flight {
     private static final String CSV_REPLACEMENT = "";
     private static final String CSV_SPLIT_REGEX = ",";
 
-    public Flight(boolean cancelled) {
+    public Flight(int originAirportId, int destAirportId, float delayTime, boolean cancelled) {
+        this.originAirportId = originAirportId;
+        this.destAirportId = destAirportId;
+        this.delayTime = delayTime;
         this.cancelled = cancelled;
     }
 
