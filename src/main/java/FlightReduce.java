@@ -9,6 +9,6 @@ public class FlightReduce implements Serializable {
     public FlightReduce(float delay, boolean canceled) {
         maxDelay = delay;
         countDelays = delay == 0 ? 0 : 1;
-        countCancelled = Integer(canceled);
+        countCancelled = canceled ? 0 : 1;
     }
 }
