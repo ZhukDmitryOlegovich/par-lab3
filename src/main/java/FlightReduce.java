@@ -6,7 +6,7 @@ public class FlightReduce implements Serializable {
     private int countCancelled;
     private int countFlights;
 
-    private static final String FORMAT = "max:%6.2f,cancelled(%%):%6.2f,delay(%%):%6.2f";
+    private static final String FORMAT = "max:%3.0f,cancelled(%%):%6.2f,delay(%%):%6.2f";
 
     public FlightReduce(Flight flight) {
         float delay = flight.getDelayTime();
