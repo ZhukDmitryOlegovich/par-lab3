@@ -8,6 +8,6 @@ public class App {
         JavaSparkContext sc = new JavaSparkContext(conf);
 
         JavaRDD<String> flights = sc.textFile("L_AIRPORT_ID.csv");
-        JavaRDD<String> airports = sc.textFile("L_AIRPORT_ID.csv");
+        JavaRDD<String> airports = sc.textFile("664600583_T_ONTIME_sample.csv");
     }
 }
