@@ -6,7 +6,7 @@ public class FlightReduce implements Serializable {
     private int countCancelled;
     private int countFlights;
 
-    private static final String FORMAT = "max: %f, \tcancelled (%%): %f, \tdelay (%%): %f";
+    private static final String FORMAT = "max: %-10.5f, \tcancelled (%%): %-10.5f, \tdelay (%%): %-10.5f";
 
     public FlightReduce(float delay, boolean canceled) {
         maxDelay = delay;
