@@ -33,5 +33,7 @@ public class App {
         Map<Integer, String> airportsMap = airportsRDD.collectAsMap();
 
         final Broadcast<Map<Integer, String>> airportsBroadcasted = sc.broadcast(airportsMap);
+
+        
     }
 }
