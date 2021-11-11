@@ -16,8 +16,9 @@ public class App {
                 .mapToPair(dataFlight -> Flight.parseCSV(dataFlight).getTupleWithAirports());
 
         airportFlights.combineByKey(
-                flight -> new FlightReduce(flight.getDelayTime(), flight.isCancelled()),
-                (accumulator, flight) -> accumulator.
+                FlightReduce::new,
+                FlightReduce::accumulate,
+                FlightReduce::merge
         );
 
         JavaRDD<String> dataAirports = sc.textFile("664600583_T_ONTIME_sample.csv");

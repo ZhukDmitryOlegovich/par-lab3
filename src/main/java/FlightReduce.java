@@ -8,11 +8,21 @@ public class FlightReduce implements Serializable {
 
     private static final String FORMAT = "max: %-10.5f, \tcancelled (%%): %-10.5f, \tdelay (%%): %-10.5f";
 
-    public FlightReduce(float delay, boolean canceled) {
+    public FlightReduce(Flight flight) {
+        float delay = flight.getDelayTime();
         maxDelay = delay;
         countDelays = delay == 0 ? 0 : 1;
-        countCancelled = canceled ? 0 : 1;
+        countCancelled = flight.isCancelled() ? 0 : 1;
         countFlights = 1;
+    }
+
+    public static FlightReduce accumulate(FlightReduce accumulator, Flight flight) {
+        float delay = flight.getDelayTime();
+        accumulator.maxDelay = Math.max(accumulator.maxDelay, delay);
+        accumulator.countDelays += delay == 0 ? 0 : 1;
+        accumulator.countCancelled += flight.isCancelled() ? 0 : 1;
+        accumulator.countFlights += 1;
+        return accumulator;
     }
 
     public static FlightReduce merge(FlightReduce accumulator, FlightReduce other) {
