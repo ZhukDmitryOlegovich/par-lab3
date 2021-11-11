@@ -34,8 +34,10 @@ public class App {
 
         final Broadcast<Map<Integer, String>> airportsBroadcasted = sc.broadcast(airportsMap);
 
-        flightStatistics.mapToPair(statistics -> {
-            String fromName = airportsBroadcasted.value()
-        })
+        flightStatistics.mapToPair(statistics -> String.format(
+                "from: %s, \tto: %s",
+                airportsBroadcasted.value().get(statistics._1._1),
+                airportsBroadcasted.value().get(statistics._1._2)
+        ));
     }
 }
