@@ -3,7 +3,7 @@ public class Flight {
     private final float delay;
 
     private static final int DEST_AIRPORT_ID_CSV_INDEX = 14;
-    private static final int DELAY_CSV_INDEX = 18;
+    private static final int CANCELLED_CSV_INDEX = 19;
 
     private static final String CSV_REPLACE_REGEX = "\"";
     private static final String CSV_REPLACEMENT = "";
