@@ -2,6 +2,7 @@ import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
+import org.apache.spark.broadcast.Broadcast;
 import scala.Tuple2;
 
 import java.util.Map;
@@ -25,10 +26,12 @@ public class App {
 
         JavaRDD<String> dataAirports = sc.textFile("664600583_T_ONTIME_sample.csv");
         String firstDataAirport = dataAirports.first();
-        JavaPairRDD<Integer, String> airports = dataAirports
+        JavaPairRDD<Integer, String> airportsRDD = dataAirports
                 .filter(dataAirport -> firstDataAirport != dataAirport)
                 .mapToPair(dataAirport -> Airport.parseCSV(dataAirport).getTuple());
 
-        Map<Integer, String> airportNameIdMap = airports.collectAsMap();
+        Map<Integer, String> airportsMap = airportsRDD.collectAsMap();
+
+        final Broadcast<Map<Integer, String>> airportsBroadcasted = sc.broadcast(airportsMap);
     }
 }
