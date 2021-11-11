@@ -1,7 +1,10 @@
 public class Flight {
     private final boolean cancelled;
+    private final boolean cancelled;
+    private final boolean cancelled;
+    private final boolean cancelled;
 
-    private static final int DEST_AIRPORT_ID_CSV_INDEX = 14;
+    private static final int ORIGIN_AIRPORT_ID_CSV_INDEX = 11;
     private static final int DEST_AIRPORT_ID_CSV_INDEX = 14;
     private static final int DELAY_CSV_INDEX = 18;
     private static final int CANCELLED_CSV_INDEX = 19;
