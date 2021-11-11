@@ -12,14 +12,9 @@ public class App {
 
         JavaRDD<String> dataFlights = sc.textFile("L_AIRPORT_ID.csv");
         String firstFlight = dataFlights.first();
-        dataFlights = dataFlights.filter(e -> firstFlight != e);
-        dataFlights.mapToPair(dataFlight -> {
-            Flight flight = Flight.parseCSV(dataFlight);
-            return new Tuple2<>(
-                    new Tuple2<>(flight.getOriginAirportId(), flight.getDestAirportId()),
-                    flight
-            );
-        });
+        dataFlights = dataFlights
+                .filter(e -> firstFlight != e)
+                .mapToPair(dataFlight -> Flight.parseCSV(dataFlight).getAirports());
 
         JavaRDD<String> airports = sc.textFile("664600583_T_ONTIME_sample.csv");
         String firstAirport = airports.first();

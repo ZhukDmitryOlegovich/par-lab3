@@ -1,3 +1,5 @@
+import scala.Tuple2;
+
 public class Flight {
     private final int originAirportId;
     private final int destAirportId;
@@ -28,6 +30,10 @@ public class Flight {
                 list[DELAY_CSV_INDEX].isEmpty() ? 0 : Float.parseFloat(list[DELAY_CSV_INDEX]),
                 list[CANCELLED_CSV_INDEX].isEmpty()
         );
+    }
+
+    public Tuple2<Tuple2<Integer, Integer>, Flight> getAirports() {
+        return new Tuple2<>(new Tuple2<>(originAirportId, destAirportId), this);
     }
 
     public int getOriginAirportId() {
