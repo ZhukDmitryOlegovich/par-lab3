@@ -31,6 +31,7 @@ public class Flight {
     public static Flight parseCSV(String csv) {
         String[] list = csv.replaceAll(CSV_REPLACE_REGEX, CSV_REPLACEMENT).split(CSV_SPLIT_REGEX);
         return new Flight(
+                list[ORIGIN_AIRPORT_ID_CSV_INDEX]
                 list[CANCELLED_CSV_INDEX].isEmpty(),
                 list[DELAY_CSV_INDEX].length() > 0 ? Float.parseFloat(list[DELAY_CSV_INDEX]) : 0
         );
