@@ -36,7 +36,7 @@ public class App {
         flightStatistics.mapToPair(statistics -> new Tuple2<>(
                 statistics._2.getStatistics(),
                 String.format(
-                        "from:\"%s\",to:\"%s\"",
+                        "from:%80s,to:%80s",
                         airportsBroadcaster.value().get(statistics._1._1),
                         airportsBroadcaster.value().get(statistics._1._2)
                 )

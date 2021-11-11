@@ -27,8 +27,11 @@ public class Airport implements Serializable {
     }
 
     public static Airport parseCSV(final String csv) {
-        String[] list = csv.replaceAll(CSV_REPLACE_REGEX, CSV_REPLACEMENT).split(CSV_SPLIT_REGEX, CSV_SPLIT_LIMIT);
-        return new Airport(Integer.parseInt(list[CODE_CSV_INDEX]), list[NAME_CSV_INDEX]);
+        String[] list = csv.split(CSV_SPLIT_REGEX, CSV_SPLIT_LIMIT);
+        return new Airport(
+                Integer.parseInt(list[CODE_CSV_INDEX].replaceAll(CSV_REPLACE_REGEX, CSV_REPLACEMENT)),
+                list[NAME_CSV_INDEX]
+        );
     }
 
     public final Tuple2<Integer, String> getTuple() {
