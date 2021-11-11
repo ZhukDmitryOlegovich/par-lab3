@@ -34,12 +34,12 @@ public class App {
         );
 
         flightStatistics.mapToPair(statistics -> new Tuple2<>(
+                statistics._2.getStatistics(),
                 String.format(
-                        "from:%84s\",to:%84s\"",
-                        '"' + airportsBroadcaster.value().get(statistics._1._1),
-                        '"' + airportsBroadcaster.value().get(statistics._1._2)
-                ),
-                statistics._2.getStatistics()
+                        "from:\"%s\",to:\"%s\"",
+                        airportsBroadcaster.value().get(statistics._1._1),
+                        airportsBroadcaster.value().get(statistics._1._2)
+                )
         )).saveAsTextFile("output");
     }
 }
