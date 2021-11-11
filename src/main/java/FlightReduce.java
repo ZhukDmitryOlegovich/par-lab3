@@ -6,6 +6,8 @@ public class FlightReduce implements Serializable {
     private int countCancelled;
     private int countFlights;
 
+    private static final String FORMAT = "max: %f, \tcancelled (%%): %f, \tdelay (%%): %f";
+
     public FlightReduce(float delay, boolean canceled) {
         maxDelay = delay;
         countDelays = delay == 0 ? 0 : 1;
@@ -21,9 +23,9 @@ public class FlightReduce implements Serializable {
         return accumulate;
     }
 
-    public String getStatistics() {
+    public final String getStatistics() {
         return String.format(
-                "max: %f, \tcancelled (%): %f, \tdelay (%): %f",
+                FORMAT,
                 maxDelay,
                 100f * countDelays / countFlights,
                 100f * countDelays / countFlights

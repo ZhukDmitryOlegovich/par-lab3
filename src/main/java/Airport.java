@@ -13,16 +13,16 @@ public class Airport implements Serializable {
     private static final String CSV_SPLIT_REGEX = ",";
     private static final int CSV_SPLIT_LIMIT = 2;
 
-    Airport(int code, String name) {
+    public Airport(int code, String name) {
         this.code = code;
         this.name = name;
     }
 
-    public String getName() {
+    public final String getName() {
         return name;
     }
 
-    public int getCode() {
+    public final int getCode() {
         return code;
     }
 
@@ -31,7 +31,7 @@ public class Airport implements Serializable {
         return new Airport(Integer.parseInt(list[CODE_CSV_INDEX]), list[NAME_CSV_INDEX]);
     }
 
-    public Tuple2<Integer, String> getTuple() {
+    public final Tuple2<Integer, String> getTuple() {
         return new Tuple2<>(code, name);
     }
 }

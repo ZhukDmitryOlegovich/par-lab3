@@ -33,23 +33,23 @@ public class Flight implements Serializable {
         );
     }
 
-    public Tuple2<Tuple2<Integer, Integer>, Flight> getTupleWithAirports() {
+    public final Tuple2<Tuple2<Integer, Integer>, Flight> getTupleWithAirports() {
         return new Tuple2<>(new Tuple2<>(originAirportId, destAirportId), this);
     }
 
-    public int getOriginAirportId() {
+    public final int getOriginAirportId() {
         return originAirportId;
     }
 
-    public int getDestAirportId() {
+    public final int getDestAirportId() {
         return destAirportId;
     }
 
-    public float getDelayTime() {
+    public final float getDelayTime() {
         return delayTime;
     }
 
-    public boolean isCancelled() {
+    public final boolean isCancelled() {
         return cancelled;
     }
 }
