@@ -27,7 +27,7 @@ public class FlightReduce implements Serializable {
         return String.format(
                 FORMAT,
                 maxDelay,
-                100f * countDelays / countFlights,
+                100f * countCancelled / countFlights,
                 100f * countDelays / countFlights
         );
     }
